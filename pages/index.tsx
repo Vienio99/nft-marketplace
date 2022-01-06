@@ -1,7 +1,15 @@
 import type { NextPage } from "next";
+import { ethers } from "ethers";
+import axios from "axios";
+import Web3modal from "web3modal";
+import { nftAddress, nftMarketAddress } from "../config";
 
 const Home: NextPage = () => {
-  return <h1 className="text-3xl font-bold underline">Hello world!</h1>;
+  return(
+    <div>
+
+    </div>
+  );
 };
 
 export default Home;

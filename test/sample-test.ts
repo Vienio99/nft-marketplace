@@ -22,8 +22,6 @@ describe("NFTMarket", function () {
     // Matic
     const auctionPrice = ethers.utils.parseEther("100");
 
-    console.log(auctionPrice);
-
     await nft.createToken("https://www.mytokenlocation.com");
     await nft.createToken("https://www.mytokenlocation2.com");
 
@@ -50,7 +48,7 @@ describe("NFTMarket", function () {
         value: auctionPrice,
       });
 
-    const items = market.getMarketItems();
+    const items = await market.getMarketItems();
     console.log(items);
   });
 });
