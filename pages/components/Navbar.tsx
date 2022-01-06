@@ -37,7 +37,7 @@ const Navbar: NextPage = () => {
             </div>
           </div>
           {/* User info / Login signup */}
-          <div className="flex items-center hidden md:flex space-x-2">
+          <div className="flex items-center md:flex space-x-2">
             {/* User info */}
           </div>
         </div>

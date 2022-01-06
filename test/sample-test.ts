@@ -17,38 +17,33 @@ describe("NFTMarket", function () {
     let listingPrice = await market.getListingPrice();
     listingPrice = listingPrice.toString();
 
-    console.log(listingPrice)
-
     // Matic
     const auctionPrice = ethers.utils.parseEther("100");
 
     await nft.createToken("https://www.mytokenlocation.com");
     await nft.createToken("https://www.mytokenlocation2.com");
 
-    await market.createMarketItem(
-      nftContractAddress,
-      0,
-      auctionPrice,
-      { value: listingPrice }
-    );
-    await market.createMarketItem(
-      nftContractAddress,
-      1,
-      auctionPrice,
-      { value: listingPrice }
-    );
+    await market.createMarketItem(nftContractAddress, 0, auctionPrice, {
+      value: listingPrice,
+    });
+    await market.createMarketItem(nftContractAddress, 1, auctionPrice, {
+      value: listingPrice,
+    });
 
     // Ignore first address which is default and it's used by contract above to create NFT
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [_, buyerAddress] = await ethers.getSigners();
 
-    await market
-      .connect(buyerAddress)
-      .createMarketSale(nftContractAddress, 0, {
-        value: auctionPrice,
-      });
+    await market.connect(buyerAddress).createMarketSale(nftContractAddress, 0, {
+      value: auctionPrice,
+    });
 
-    const items = await market.getMarketItems();
-    console.log(items);
+    const data = await market.getMarketItems();
+    // const items = await Promise.all(
+    //   data.map(async (i) => {
+    //     console.log(ethers.utils.formatEther( i.tokenId.value ));
+    //   })
+    // );
+    console.log(data[0][0].toNumber());
   });
 });
