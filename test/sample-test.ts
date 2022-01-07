@@ -39,11 +39,12 @@ describe("NFTMarket", function () {
     });
 
     const data = await market.getMarketItems();
-    // const items = await Promise.all(
-    //   data.map(async (i) => {
-    //     console.log(ethers.utils.formatEther( i.tokenId.value ));
-    //   })
-    // );
-    console.log(data[0][0].toNumber());
+    const items = await Promise.all(
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      data.map(async (i: any) => {
+        console.log(i.tokenId.toNumber());
+      })
+    );
+    console.log(items);
   });
 });
