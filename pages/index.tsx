@@ -88,7 +88,11 @@ const Home: NextPage = () => {
           <div key={i}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src={nft.image} alt="NFT image" />
-          </div>
+            <p>{nft.name}</p>
+            <p>{nft.description}</p>
+            <h1>{nft.price}</h1>
+            <button onClick={() => buyNFT(nft)}>Buy</button>
+          </div>;
         })}
       </div>
     </div>
