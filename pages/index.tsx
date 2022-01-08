@@ -1,6 +1,6 @@
 import type { NextPage } from "next";
 import { useEffect, useState } from "react";
-import Spinner from "./components/Spinner";
+import Spinner from "../components/Spinner";
 import { ethers } from "ethers";
 import { nftAddress, nftMarketAddress } from "../config";
 import NFT from "../artifacts/contracts/NFT.sol/NFT.json";
@@ -80,21 +80,26 @@ const Home: NextPage = () => {
   }
 
   return (
-    <div className="">
+    <div className="flex flex-grow items-center">
       {loading && <Spinner />}
-      {!loading && !nfts.length ? <h1>No items in the marketplace.</h1> : nfts}
-      <div>
-        {nfts.map((nft, i) => {
-          <div key={i}>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={nft.image} alt="NFT image" />
-            <p>{nft.name}</p>
-            <p>{nft.description}</p>
-            <h1>{nft.price}</h1>
-            <button onClick={() => buyNFT(nft)}>Buy</button>
-          </div>;
-        })}
-      </div>
+      {!loading && !nfts.length ? (
+        <h1 className="text-center text-xl font-bold text-gray-700 flex-grow">
+          No items in the marketplace.
+        </h1>
+      ) : (
+        <div>
+          {nfts.map((nft, i) => {
+            <div key={i}>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src={nft.image} alt="NFT image" />
+              <p>{nft.name}</p>
+              <p>{nft.description}</p>
+              <h1>{nft.price}</h1>
+              <button onClick={() => buyNFT(nft)}>Buy</button>
+            </div>;
+          })}
+        </div>
+      )}
     </div>
   );
 };
