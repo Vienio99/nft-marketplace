@@ -81,22 +81,30 @@ const Home: NextPage = () => {
 
   return (
     <div className="flex mt-10">
-      {loading && <Spinner />}
-      {!nfts.length ? (
+      {loading && !nfts.length && <Spinner />}
+      {!loading && !nfts.length && (
         <h1 className="text-center text-xl font-bold text-gray-700 flex-grow">
           No items in the marketplace.
         </h1>
-      ) : (
+      )}
+      {!loading && nfts.length && (
         <div className="grid grid-cols-4 items-center mx-auto gap-6 text-gray-700">
           {nfts.map((nft, i) => (
             <div key={i} className="rounded-md shadow-lg border-2 w-60">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={nft.image} alt="NFT image" className="object-scale-down h-64 p-5 mx-auto" />
+              <img
+                src={nft.image}
+                alt="NFT image"
+                className="object-scale-down h-64 p-5 mx-auto"
+              />
               <div className="flex flex-col m-5">
                 <h1 className="text-xl font-bold">{nft.name}</h1>
                 <p>{nft.description}</p>
                 <h1 className="text-xl text-right">{nft.price} Matic</h1>
-                <button onClick={() => buyNFT(nft)} className="relative overflow-hidden group h-9 px-5 w-1/2 self-end text-white rounded-xl transition-all duration-500 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-size-200 bg-pos-0 hover:bg-pos-100">
+                <button
+                  onClick={() => buyNFT(nft)}
+                  className="relative overflow-hidden group h-9 px-5 w-1/2 self-end text-white rounded-xl transition-all duration-500 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-size-200 bg-pos-0 hover:bg-pos-100"
+                >
                   <span className="absolute right-0 w-8 h-32 -mt-12 transition-all duration-1000 transform translate-x-12 bg-white opacity-10 rotate-12 group-hover:-translate-x-40 ease"></span>
                   <span className="relative">
                     <p>Buy</p>
