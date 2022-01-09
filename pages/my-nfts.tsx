@@ -6,7 +6,6 @@ import { nftAddress, nftMarketAddress } from "../config";
 import NFT from "../artifacts/contracts/NFT.sol/NFT.json";
 import Market from "../artifacts/contracts/NFTMarket.sol/NFTMarket.json";
 import axios from "axios";
-import Web3Modal from "web3modal";
 
 interface MarketItem {
   // Need to change it but not sure what type should be here
@@ -21,7 +20,7 @@ interface MarketItem {
   description: string;
 }
 
-const Home: NextPage = () => {
+const MyNFTs: NextPage = () => {
   const [nfts, setNfts] = useState<MarketItem[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -37,10 +36,9 @@ const Home: NextPage = () => {
       Market.abi,
       provider
     );
-    const data = await marketContract.getMarketItems();
+    const data = await marketContract.getMyNfts();
     const items = await Promise.all(
       data.map(async (i: MarketItem) => {
-        console.log(i);
         const tokenUri = await tokenContract.tokenURI(i.tokenId);
         const meta = await axios.get(tokenUri);
         const price = ethers.utils.formatUnits(i.price.toString(), "ether");
@@ -60,32 +58,12 @@ const Home: NextPage = () => {
     setLoading(false);
   }
 
-  async function buyNFT(nft: MarketItem) {
-    const web3Modal = new Web3Modal();
-    const connection = await web3Modal.connect();
-    const provider = new ethers.providers.Web3Provider(connection);
-
-    const signer = provider.getSigner();
-    const contract = new ethers.Contract(nftMarketAddress, Market.abi, signer);
-
-    const price = ethers.utils.parseUnits(nft.price.toString(), "ether");
-    // console.log(nft.itemId.toString());
-    const transaction = await contract.createMarketSale(
-      nftAddress,
-      nft.itemId.toString(),
-      { value: price }
-    );
-
-    await transaction.wait();
-    loadNFTs();
-  }
-
   return (
     <div className="flex mt-10">
       {loading && !nfts.length && <Spinner />}
       {!loading && !nfts.length && (
         <h1 className="text-center text-xl font-bold text-gray-700 flex-grow">
-          No items in the marketplace.
+          You don&apos;t have any NFts.
         </h1>
       )}
       {!loading && nfts.length && (
@@ -102,15 +80,15 @@ const Home: NextPage = () => {
                 <h1 className="text-xl font-bold">{nft.name}</h1>
                 <p>{nft.description}</p>
                 <h1 className="text-xl text-right">{nft.price} Matic</h1>
-                <button
+                {/* <button
                   onClick={() => buyNFT(nft)}
                   className="relative overflow-hidden group h-9 px-5 w-1/2 self-end text-white rounded-xl transition-all duration-500 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-size-200 bg-pos-0 hover:bg-pos-100"
-                >
-                  <span className="absolute right-0 w-8 h-32 -mt-12 transition-all duration-1000 transform translate-x-12 bg-white opacity-10 rotate-12 group-hover:-translate-x-40 ease"></span>
+                > */}
+                  {/* <span className="absolute right-0 w-8 h-32 -mt-12 transition-all duration-1000 transform translate-x-12 bg-white opacity-10 rotate-12 group-hover:-translate-x-40 ease"></span>
                   <span className="relative">
                     <p>Buy</p>
                   </span>
-                </button>
+                </button> */}
               </div>
             </div>
           ))}
@@ -120,4 +98,4 @@ const Home: NextPage = () => {
   );
 };
 
-export default Home;
+export default MyNFTs;
