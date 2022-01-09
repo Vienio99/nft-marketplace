@@ -38,13 +38,15 @@ describe("NFTMarket", function () {
       value: auctionPrice,
     });
 
-    const data = await market.getMarketItems();
-    const items = await Promise.all(
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      data.map(async (i: any) => {
-        console.log(i.tokenId.toNumber());
-      })
-    );
-    console.log(items);
+    // const data = await market.getMarketItems();
+    // const items = await Promise.all(
+    //   // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    //   data.map(async (i: any) => {
+    //     console.log(i.tokenId.toNumber());
+    //   })
+    // );
+    const price = "2";
+    const nftPrice = ethers.utils.parseEther(price);
+    console.log(nftPrice);
   });
 });

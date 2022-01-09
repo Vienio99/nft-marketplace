@@ -6,17 +6,17 @@ import { HardhatUserConfig } from "hardhat/types";
 
 // eslint-disable-next-line import/no-anonymous-default-export
 const config: HardhatUserConfig =  {
-  // networks: {
-  //   hardhat: {
-  //     chainId: 1337,
-  //   },
-  //   mumbai: {
-  //     url: "https://fllulozfvc2j.usemoralis.com:2053/server",
-  //     accounts: [privateKey],
-  //   },
-  //   mainnet: {},
-  //   accounts: [privateKey],
-  // },
+  networks: {
+    hardhat: {
+      chainId: 1337,
+    },
+    // mumbai: {
+    //   url: "https://fllulozfvc2j.usemoralis.com:2053/server",
+    //   accounts: [privateKey],
+    // },
+    // mainnet: {},
+    // accounts: [privateKey],
+  },
   defaultNetwork: "hardhat",
   solidity: "0.8.4",
 };

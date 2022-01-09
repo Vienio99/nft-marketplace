@@ -11,7 +11,7 @@ import Web3Modal from "web3modal";
 interface MarketItem {
   // Need to change it but not sure what type should be here
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  tokenId: any;
+  tokenId: ethers.BigNumber;
   seller: string;
   owner: string;
   price: string;
@@ -82,22 +82,22 @@ const Home: NextPage = () => {
   return (
     <div className="flex flex-grow items-center">
       {loading && <Spinner />}
-      {!loading && !nfts.length ? (
+      {!nfts.length ? (
         <h1 className="text-center text-xl font-bold text-gray-700 flex-grow">
           No items in the marketplace.
         </h1>
       ) : (
         <div>
-          {nfts.map((nft, i) => {
+          {nfts.map((nft, i) => 
             <div key={i}>
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={nft.image} alt="NFT image" />
+              <img src={nft.image} alt="NFT image" width="200px"/>
               <p>{nft.name}</p>
               <p>{nft.description}</p>
               <h1>{nft.price}</h1>
               <button onClick={() => buyNFT(nft)}>Buy</button>
-            </div>;
-          })}
+            </div>
+          )}
         </div>
       )}
     </div>
