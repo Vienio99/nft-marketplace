@@ -9,17 +9,16 @@ const Navbar = () => {
           <div className="flex space-x-4">
             {/* Logo */}
             <div>
-              <a
-                href="#"
-                className="flex items-center px-3 py-6 hover:text-gray-900"
-              >
+              <div className="flex items-center px-3 py-6 hover:text-gray-900 cursor-pointer">
                 {/* <Image
                   src=""
                   width="35px"
                   alt=""
                 /> */}
-                <span className="font-bold">Meta Marketplace</span>
-              </a>
+                <Link href="/">
+                  <span className="font-bold">Meta Marketplace</span>
+                </Link>
+              </div>
             </div>
             {/* Links on the left */}
             <div className="flex flex-grow items-center md:flex space-x-1">
