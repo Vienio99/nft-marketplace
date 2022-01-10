@@ -35,6 +35,7 @@ const MintNFT: NextPage = () => {
 
   async function createNFT(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    // TO-DO: add better form validation f. e. with formik and React forms
     if (!name || !price || !description || !fileUrl) return;
     const data = JSON.stringify({ name, description, image: fileUrl });
     try {
