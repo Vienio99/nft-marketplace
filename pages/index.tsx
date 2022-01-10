@@ -9,8 +9,6 @@ import axios from "axios";
 import Web3Modal from "web3modal";
 
 interface MarketItem {
-  // Need to change it but not sure what type should be here
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   tokenId: ethers.BigNumber;
   itemId: ethers.BigNumber;
   seller: string;
@@ -82,13 +80,17 @@ const Home: NextPage = () => {
 
   return (
     <div className="flex mt-10">
-      {loading && !nfts.length && <Spinner />}
-      {!loading && !nfts.length && (
-        <h1 className="text-center text-xl font-bold text-gray-700 flex-grow">
-          No items in the marketplace.
-        </h1>
-      )}
-      {!loading && nfts.length && (
+      {!nfts.length ? (
+        <>
+          {loading ? (
+            <Spinner />
+          ) : (
+            <h1 className="text-center text-xl font-bold text-gray-700 flex-grow">
+              No items in the marketplace.
+            </h1>
+          )}
+        </>
+      ) : (
         <div className="grid grid-cols-4 items-center mx-auto gap-6 text-gray-700">
           {nfts.map((nft, i) => (
             <div key={i} className="rounded-md shadow-lg border-2 w-60">
