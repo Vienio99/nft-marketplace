@@ -28,6 +28,7 @@ const Home: NextPage = () => {
   }, []);
 
   async function loadNFTs() {
+    // TO-DO: move it to redux
     const provider = new ethers.providers.JsonRpcProvider();
     const tokenContract = new ethers.Contract(nftAddress, NFT.abi, provider);
     const marketContract = new ethers.Contract(
@@ -35,6 +36,7 @@ const Home: NextPage = () => {
       Market.abi,
       provider
     );
+    console.log(marketContract);
     const data = await marketContract.getMarketItems();
     const items = await Promise.all(
       data.map(async (i: MarketItem) => {

@@ -11,8 +11,9 @@ const Navbar = () => {
             <div>
               <div className="flex items-center px-3 py-6 hover:text-gray-900 cursor-pointer">
                 {/* <Image
-                  src=""
-                  width="35px"
+                  src="https://upload.wikimedia.org/wikipedia/commons/0/05/Ethereum_logo_2014.svg"
+                  width="35"
+                  height="35"
                   alt=""
                 /> */}
                 <Link href="/">
